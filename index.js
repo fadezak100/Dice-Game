@@ -26,6 +26,14 @@ function rollDice() {
     turnScore += randomNumber;
     document.getElementById("player" + turn).innerHTML = "Turn Score: " + turnScore;
   } else {
+    //Add an audio and background effect in case of the dice is equall to 1. 
+    var audio = new Audio("sounds/wrong.mp3"); 
+    audio.play();
+    document.body.classList.add("round-over"); 
+    setTimeout(() => {
+      document.body.classList.remove("round-over"); 
+    }, 150); 
+    
     turnScore = 0;
     document.getElementById("player" + turn).innerHTML = "Turn Score: " + turnScore;
     turn === 0 ? turn = 1 : turn = 0;
@@ -43,8 +51,16 @@ function holdScore() {
   document.getElementById("total" + turn).innerHTML = "Total Score: " + scores[turn];
   document.getElementById("player" + turn).innerHTML = "Turn Score: " + turnScore;
 
-  //Check if player's socre is 30 or below
+  //Check if player's socre is 30, below, or higehr. 
   if (scores[turn] >= 30) {
+    //Add an audio and a background color in case of wining. 
+    var audio = new Audio("sounds/winner.mp3"); 
+    audio.play();
+    document.body.classList.add("winner"); 
+    setTimeout(() => {
+      document.body.classList.remove("winner"); 
+    }, 150); 
+    
     document.querySelectorAll("h1")[0].innerHTML = "Player " + (turn + 1) + " Won 🔥";
     if (turn === 0) {
       document.getElementById("player-name-" + turn).innerHTML = "Winner 🔥"
@@ -79,6 +95,10 @@ function initialize() {
   document.querySelectorAll("p")[2].innerHTML = "Turn Score: " + '0';
   document.querySelectorAll("p")[4].innerHTML = "Total Score: " + '0';
   document.querySelectorAll("p")[5].innerHTML = "Turn Score: " + '0';
+
+  //Reenable buttons 
+  document.getElementById("roll").disabled = false;
+  document.getElementById("hold").disabled = false;
 
   //Change Player turn
   changeTurns(turn);

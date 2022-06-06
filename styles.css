@@ -96,3 +96,13 @@ footer {
   position: relative;
   top: 1px;
 }
+
+.winner{
+  background-color: yellow;
+  opacity: 0.5;
+}
+
+.round-over{
+  background-color: red;
+  opacity: 0.75;
+}
